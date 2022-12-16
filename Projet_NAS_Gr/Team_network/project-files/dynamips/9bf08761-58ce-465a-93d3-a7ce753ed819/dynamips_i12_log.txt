@@ -1,0 +1,53 @@
+Dec 09 11:59:57.508 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Dec 09 11:59:57.509 HYPERVISOR: Started on IP = localhost, TCP port = 49674.
+Dec 09 11:59:57.985 HYPERVISOR: exec_cmd: hypervisor version 
+Dec 09 11:59:57.985 HYPERVISOR: exec_cmd: hypervisor working_dir D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\Projet_NAS\Projet-Nas\Projet_NAS_Gr\project-files\dynamips 
+Dec 09 11:59:57.985 GENERAL: working_dir=D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\Projet_NAS\Projet-Nas\Projet_NAS_Gr\project-files\dynamips
+Dec 09 11:59:57.985 HYPERVISOR: exec_cmd: hypervisor working_dir D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\Projet_NAS\Projet-Nas\Projet_NAS_Gr\project-files\dynamips\5870929b-70a7-44d5-bdc2-33904c0a343e 
+Dec 09 11:59:58.021 GENERAL: working_dir=D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\Projet_NAS\Projet-Nas\Projet_NAS_Gr\project-files\dynamips\5870929b-70a7-44d5-bdc2-33904c0a343e
+Dec 09 11:59:58.021 HYPERVISOR: exec_cmd: vm create R2 2 c7200 
+Dec 09 11:59:58.024 VM: VM R2 created.
+Dec 09 11:59:58.024 HYPERVISOR: exec_cmd: vm set_con_tcp_port R2 5007 
+Dec 09 11:59:58.024 HYPERVISOR: exec_cmd: c7200 get_mac_addr R2 
+Dec 09 11:59:58.025 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 11:59:58.025 HYPERVISOR: exec_cmd: vm slot_add_binding R2 0 0 C7200-IO-FE 
+Dec 09 11:59:58.027 HYPERVISOR: exec_cmd: vm set_disk0 R2 0 
+Dec 09 11:59:58.027 HYPERVISOR: exec_cmd: vm set_exec_area R2 64 
+Dec 09 11:59:58.029 HYPERVISOR: exec_cmd: vm set_ios R2 C:/Users/tpoup/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Dec 09 11:59:58.029 HYPERVISOR: exec_cmd: c7200 set_mac_addr R2 ca02.4e64.0000 
+Dec 09 11:59:58.029 HYPERVISOR: exec_cmd: vm set_nvram R2 512 
+Dec 09 11:59:58.030 HYPERVISOR: exec_cmd: vm set_ram R2 512 
+Dec 09 11:59:58.030 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 11:59:58.030 HYPERVISOR: exec_cmd: vm slot_add_binding R2 1 0 PA-GE 
+Dec 09 11:59:58.030 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 11:59:58.031 HYPERVISOR: exec_cmd: vm slot_add_binding R2 2 0 PA-GE 
+Dec 09 11:59:58.031 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 11:59:58.031 HYPERVISOR: exec_cmd: vm slot_add_binding R2 3 0 PA-GE 
+Dec 09 11:59:58.032 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 11:59:58.032 HYPERVISOR: exec_cmd: vm slot_add_binding R2 4 0 PA-GE 
+Dec 09 11:59:58.034 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 11:59:58.034 HYPERVISOR: exec_cmd: vm slot_add_binding R2 5 0 PA-GE 
+Dec 09 11:59:58.034 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 11:59:58.034 HYPERVISOR: exec_cmd: vm slot_add_binding R2 6 0 PA-GE 
+Dec 09 11:59:58.036 HYPERVISOR: exec_cmd: vm set_con_tcp_port R2 5007 
+Dec 09 12:00:04.364 HYPERVISOR: exec_cmd: nio create_udp udp-83c43f2d-f935-44ec-ad3e-466779629c9c 10004 127.0.0.1 10005 
+Dec 09 12:00:04.626 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R2 1 0 udp-83c43f2d-f935-44ec-ad3e-466779629c9c 
+Dec 09 12:00:04.627 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 12:00:07.131 HYPERVISOR: exec_cmd: nio create_udp udp-1b25de72-149a-4709-8b53-64f917f06836 10034 127.0.0.1 10035 
+Dec 09 12:00:07.134 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R2 2 0 udp-1b25de72-149a-4709-8b53-64f917f06836 
+Dec 09 12:00:07.134 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 12:00:07.329 HYPERVISOR: exec_cmd: nio create_udp udp-32fe7197-9728-4448-b4d9-be9dd7e08f29 10050 127.0.0.1 10051 
+Dec 09 12:00:07.332 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R2 3 0 udp-32fe7197-9728-4448-b4d9-be9dd7e08f29 
+Dec 09 12:00:07.332 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 12:00:08.141 HYPERVISOR: exec_cmd: nio create_udp udp-b561d20f-d130-43c9-ad70-7326342a79cc 10074 127.0.0.1 10075 
+Dec 09 12:00:08.144 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R2 4 0 udp-b561d20f-d130-43c9-ad70-7326342a79cc 
+Dec 09 12:00:08.145 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 12:00:40.428 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 12:00:40.429 HYPERVISOR: exec_cmd: vm extract_config R2 
+Dec 09 12:00:40.923 HYPERVISOR: exec_cmd: vm get_status R2 
+Dec 09 12:00:40.923 HYPERVISOR: exec_cmd: vm extract_config R2 
+Dec 09 12:00:40.926 HYPERVISOR: exec_cmd: vm delete R2 
+Dec 09 12:00:40.927 VM: VM R2 destroyed.
+Dec 09 12:00:40.928 HYPERVISOR: exec_cmd: hypervisor stop 
+Dec 09 12:00:40.965 HYPERVISOR: Stopped.
+Dec 09 12:00:40.965 GENERAL: reset done.
