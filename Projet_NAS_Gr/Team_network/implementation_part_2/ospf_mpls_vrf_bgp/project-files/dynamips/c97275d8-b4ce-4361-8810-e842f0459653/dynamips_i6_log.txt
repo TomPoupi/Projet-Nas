@@ -1,0 +1,63 @@
+Dec 24 14:38:57.988 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Dec 24 14:38:57.990 HYPERVISOR: Started on TCP port = 51290.
+Dec 24 14:38:58.484 HYPERVISOR: exec_cmd: hypervisor version 
+Dec 24 14:38:58.485 HYPERVISOR: exec_cmd: hypervisor working_dir D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips 
+Dec 24 14:38:58.485 GENERAL: working_dir=D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips
+Dec 24 14:38:58.485 HYPERVISOR: exec_cmd: hypervisor working_dir D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips\a58e75e3-37ad-488f-a5f3-eb4f86494bb3 
+Dec 24 14:38:58.486 GENERAL: working_dir=D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips\a58e75e3-37ad-488f-a5f3-eb4f86494bb3
+Dec 24 14:38:58.486 HYPERVISOR: exec_cmd: vm create PE4 10 c7200 
+Dec 24 14:38:58.488 VM: VM PE4 created.
+Dec 24 14:38:58.488 HYPERVISOR: exec_cmd: vm set_con_tcp_port PE4 5015 
+Dec 24 14:38:58.488 HYPERVISOR: exec_cmd: c7200 get_mac_addr PE4 
+Dec 24 14:38:58.489 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:38:58.489 HYPERVISOR: exec_cmd: vm slot_add_binding PE4 0 0 C7200-IO-FE 
+Dec 24 14:38:58.489 HYPERVISOR: exec_cmd: vm set_disk0 PE4 0 
+Dec 24 14:38:58.490 HYPERVISOR: exec_cmd: vm set_exec_area PE4 64 
+Dec 24 14:38:58.491 HYPERVISOR: exec_cmd: vm set_ios PE4 C:/Users/tpoup/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Dec 24 14:38:58.491 HYPERVISOR: exec_cmd: c7200 set_mac_addr PE4 ca0a.5628.0000 
+Dec 24 14:38:58.491 HYPERVISOR: exec_cmd: vm set_nvram PE4 512 
+Dec 24 14:38:58.492 HYPERVISOR: exec_cmd: vm set_ram PE4 512 
+Dec 24 14:38:58.492 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:38:58.493 HYPERVISOR: exec_cmd: vm slot_add_binding PE4 1 0 PA-GE 
+Dec 24 14:38:58.493 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:38:58.493 HYPERVISOR: exec_cmd: vm slot_add_binding PE4 2 0 PA-GE 
+Dec 24 14:38:58.493 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:38:58.494 HYPERVISOR: exec_cmd: vm slot_add_binding PE4 3 0 PA-GE 
+Dec 24 14:38:58.494 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:38:58.494 HYPERVISOR: exec_cmd: vm slot_add_binding PE4 4 0 PA-GE 
+Dec 24 14:38:58.495 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:38:58.495 HYPERVISOR: exec_cmd: vm slot_add_binding PE4 5 0 PA-GE 
+Dec 24 14:38:58.495 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:38:58.495 HYPERVISOR: exec_cmd: vm slot_add_binding PE4 6 0 PA-GE 
+Dec 24 14:39:01.516 HYPERVISOR: exec_cmd: nio create_udp udp-c9e0b979-7302-4836-abe6-c3e267357699 10008 127.0.0.1 10009 
+Dec 24 14:39:01.804 HYPERVISOR: exec_cmd: vm slot_add_nio_binding PE4 1 0 udp-c9e0b979-7302-4836-abe6-c3e267357699 
+Dec 24 14:39:01.805 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:39:02.434 HYPERVISOR: exec_cmd: nio create_udp udp-0fa36eb0-6dd4-4d10-a600-5e95280e2fa3 10020 127.0.0.1 10021 
+Dec 24 14:39:02.437 HYPERVISOR: exec_cmd: vm slot_add_nio_binding PE4 2 0 udp-0fa36eb0-6dd4-4d10-a600-5e95280e2fa3 
+Dec 24 14:39:02.437 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:39:03.498 HYPERVISOR: exec_cmd: nio create_udp udp-31751370-ac02-4d54-ab78-4e84726c97b3 10046 127.0.0.1 10047 
+Dec 24 14:39:03.502 HYPERVISOR: exec_cmd: vm slot_add_nio_binding PE4 0 0 udp-31751370-ac02-4d54-ab78-4e84726c97b3 
+Dec 24 14:39:03.502 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:39:03.979 HYPERVISOR: exec_cmd: nio create_udp udp-c2c9ffaf-6bd5-49ba-9379-97f31b24257c 10064 127.0.0.1 10065 
+Dec 24 14:39:03.982 HYPERVISOR: exec_cmd: vm slot_add_nio_binding PE4 3 0 udp-c2c9ffaf-6bd5-49ba-9379-97f31b24257c 
+Dec 24 14:39:03.982 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:40:39.066 HYPERVISOR: exec_cmd: vm set_ghost_status PE4 2 
+Dec 24 14:40:39.067 HYPERVISOR: exec_cmd: vm set_ghost_file PE4 D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Dec 24 14:40:39.068 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 14:40:39.069 HYPERVISOR: exec_cmd: vm set_config PE4 configs\i10_startup-config.cfg configs\i10_private-config.cfg 
+Dec 24 14:40:39.069 HYPERVISOR: exec_cmd: vm start PE4 
+Dec 24 14:41:09.890 HYPERVISOR: exec_cmd: vm extract_config PE4 
+Dec 24 15:25:40.977 HYPERVISOR: exec_cmd: vm extract_config PE4 
+Dec 24 16:57:23.918 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 16:57:23.919 HYPERVISOR: exec_cmd: vm stop PE4 
+Dec 24 16:57:24.144 VM: VM PE4 shutdown.
+Dec 24 16:57:24.145 HYPERVISOR: exec_cmd: vm extract_config PE4 
+Dec 24 17:03:53.043 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 17:03:53.044 HYPERVISOR: exec_cmd: vm extract_config PE4 
+Dec 24 17:03:53.586 HYPERVISOR: exec_cmd: vm get_status PE4 
+Dec 24 17:03:53.587 HYPERVISOR: exec_cmd: vm extract_config PE4 
+Dec 24 17:03:53.594 HYPERVISOR: exec_cmd: vm delete PE4 
+Dec 24 17:03:53.594 VM: VM PE4 destroyed.
+Dec 24 17:03:53.597 HYPERVISOR: exec_cmd: hypervisor stop 
+Dec 24 17:03:54.032 HYPERVISOR: Stopped.
+Dec 24 17:03:54.033 GENERAL: reset done.
