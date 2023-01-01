@@ -73,12 +73,13 @@ def create_link(tab_link) :
 # fonction qui configure en telnet les routers
 def config_router(i,router):
     r = lab.get_node("R"+str(i+1))
+    
     # on attend que le router est bien up avant de les configs en telnet
     while True :
         if r.status == "started":
             break
-    #fonction config en telnet
-    config_telnet(router,i)
+    #fonction config en telnet, r.console = port tcp , pour connection avec le router
+    config_telnet(router,i,r.console)
 
 
 if __name__ == '__main__':

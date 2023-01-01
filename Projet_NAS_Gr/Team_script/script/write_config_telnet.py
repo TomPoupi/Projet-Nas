@@ -9,16 +9,12 @@ import time
 
 
 
-def config_telnet(router,i) :
+def config_telnet(router,i,port) :
 
     print(router["name"]+" : start to work")
 
-    # chaque router est sur localhost (127.0.0.1) et le port est dans l'ordre d'apparition des routers ex : 5000 pour R1, 5001 pour R2, 5002 pour R3 etc...
-    # faire attention quand on config data.json de bien mettre les noms des routers dans le sens croisant (du haut vers le bas) (R1 puis R2 puis R3 etc....)
-    # car au sinon le code est cassé
-
     HOST = "127.0.0.1"
-    PORT = "500"+str(i)
+    PORT = str(port)
 
     tn = telnetlib.Telnet(HOST,PORT)
 
