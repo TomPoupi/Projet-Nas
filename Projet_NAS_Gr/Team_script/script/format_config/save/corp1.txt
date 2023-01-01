@@ -1,0 +1,21 @@
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+!
