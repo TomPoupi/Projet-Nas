@@ -1,5 +1,5 @@
 import gns3fy
-from write_config import *
+#from write_config import *
 from write_config_telnet import *
 import json
 import multiprocess
