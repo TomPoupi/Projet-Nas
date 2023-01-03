@@ -16,7 +16,7 @@ gns3_server = gns3fy.Gns3Connector("http://localhost:3090")
 lab = gns3fy.Project(name="script", connector=gns3_server)
 lab.get()
 project_id = lab.project_id
-#lab.open()
+lab.open()
 
 
 # fonction qui del tous les routers de mon projet
@@ -41,32 +41,36 @@ def create_node(routers) :
 
 # fonction qui prend les routers de la data.json et fait un tableau de dictionnaire. key :interface, element : couple de router
 # pour le moment la data.json fera en sorte que pour un lien on utilisera une même interface dans les 2 routers 
-def tab_dictionnaire_link(routers) :
+def tab_de_tab_link(routers) :
     tab_link = []
+    tab_link_final =[]
     for i in range(0,len(routers)) :
-        link={}
-        couple=[]
+        lien=[]
+        inter1=[]
+        inter2=[]
         for j in range(0,len(routers[i]["interfaces"])) :
             if routers[i]["interfaces"][j]["neighbor"] != "No" :
-                couple = [routers[i]['name'],routers[i]["interfaces"][j]["neighbor"]]
+                inter1 = [routers[i]["name"],routers[i]["interfaces"][j]["name"]]
+                inter2 = [routers[i]["interfaces"][j]["neighbor"],"Null"]
+                lien = [inter1,inter2]
                 
-                #pour éviter d'avoir des doublons
-                s=0
                 for k in range(0,len(tab_link)) :
-                    for lien in tab_link[k]:
-                        if tab_link[k][lien] == couple or tab_link[k][lien] == couple[::-1]:
-                            s = s + 1
-                if s == 0 :
-                    link[routers[i]["interfaces"][j]["name"]] = couple
-        if len(link)!= 0 :
-            tab_link.append(link)
-    return tab_link
+                    if tab_link[k][0][0] == routers[i]["interfaces"][j]["neighbor"] and tab_link[k][1][0] == routers[i]["name"] :
+                        tab_link[k][1][1] = routers[i]["interfaces"][j]["name"]
+
+                tab_link.append(lien)
+
+    # pour éliminer les doublons
+    for k in range(0,len(tab_link)) :
+        if tab_link[k][1][1] != "Null" :
+            tab_link_final.append(tab_link[k])
+                  
+    return tab_link_final
 
 #fonction qui créer les liens sur gns3 à partir du tab de lien 
 def create_link(tab_link) :
     for i in range(0,len(tab_link)) :
-        for key ,interface in tab_link[i].items():
-                lab.create_link(interface[0], key, interface[1],key)
+        lab.create_link(tab_link[i][0][0], tab_link[i][0][1], tab_link[i][1][0], tab_link[i][1][1])
 
 
 
@@ -81,13 +85,14 @@ def config_router(i,router):
     #fonction config en telnet, r.console = port tcp , pour connection avec le router
     config_telnet(router,i,r.console)
 
+#print(tab_dictionnaire_link(data['data']))
 
 if __name__ == '__main__':
 
     delete_node(lab)
     create_node(data['data'])
     lab.get()
-    create_link(tab_dictionnaire_link(data['data']))
+    create_link(tab_de_tab_link(data['data']))
     lab.get()
     lab.start_nodes()
 
