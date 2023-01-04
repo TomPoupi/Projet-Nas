@@ -83,8 +83,12 @@ def config_router(i,router):
         if r.status == "started":
             break
     #fonction config en telnet, r.console = port tcp , pour connection avec le router
-    config_telnet(router,i,r.console)
-
+    if router["role"]=="PE" :
+        config_telnet_PE(router,i,r.console)
+    elif router["role"]=="R" :
+        config_telnet_R(router,i,r.console)
+    else:
+        config_telnet(router,i,r.console)
 #print(tab_dictionnaire_link(data['data']))
 
 if __name__ == '__main__':
@@ -96,7 +100,7 @@ if __name__ == '__main__':
     lab.get()
     lab.start_nodes()
 
-    # start des process pour config les routers, 1 process/ router
+    #start des process pour config les routers, 1 process/ router
     processes = [multiprocess.Process(target=config_router, args=(i, data['data'][i])) for i in range(len(data['data']))]
 
 

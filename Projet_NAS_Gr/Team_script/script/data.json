@@ -4,6 +4,13 @@
 		{
 			"name": "R1",
 			"role": "R",
+			"ospf": [
+				{
+					"process":"1",	
+					"area" : "0",
+					"router-id": "1.1.1.1"	
+				}
+			],
 			"X":-1,
 			"Y":1,
 			"interfaces": 
@@ -34,6 +41,13 @@
 		{
 			"name": "R2",
 			"role": "R",
+			"ospf": [
+				{
+					"process":"2",	
+					"area" : "0",
+					"router-id": "2.2.2.2"	
+				}
+			],
 			"X":-1,
 			"Y":-1,
 			"interfaces": 
@@ -64,6 +78,13 @@
 		{
 			"name": "R3",
 			"role": "R",
+			"ospf": [
+				{
+					"process":"3",	
+					"area" : "0",
+					"router-id": "3.3.3.3"	
+				}
+			],
 			"X":1,
 			"Y":1,
 			"interfaces": 
@@ -94,6 +115,13 @@
 		{
 			"name": "R4",
 			"role": "R",
+			"ospf": [
+				{
+					"process":"1",	
+					"area" : "0",
+					"router-id": "4.4.4.4"	
+				}
+			],
 			"X":1,
 			"Y":-1,
 			"interfaces": 
@@ -124,6 +152,13 @@
 		{
 			"name": "R5",
 			"role": "PE",
+			"ospf": [
+				{
+					"process":"5",	
+					"area" : "0",
+					"router-id": "5.5.5.5"	
+				}
+			],
 			"X":-3,
 			"Y":1.5,
 			"interfaces": 
@@ -131,17 +166,21 @@
 					{
 						"name": "Loopback1", 
 						"ipv4": "5.5.5.5 255.255.255.255",
-						"neighbor":"No"
+						"neighbor":"No",
+						"config_ospf_mpls": true
 					},
 					{
 						"name": "GigabitEthernet1/0", 
 						"ipv4": "10.1.1.5 255.255.255.0",
-						"neighbor":"R1"
+						"neighbor":"R1",
+						"config_ospf_mpls": true
+
 					},
 					{
 						"name": "GigabitEthernet2/0", 
 						"ipv4": "10.2.2.5 255.255.255.0",
-						"neighbor":"R2"
+						"neighbor":"R2",
+						"config_ospf_mpls": true
 					}
 
 				]
@@ -149,6 +188,13 @@
 		{
 			"name": "R6",
 			"role": "PE",
+			"ospf": [
+				{
+					"process":"6",	
+					"area" : "0",
+					"router-id": "6.6.6.6"	
+				}
+			],
 			"X":3,
 			"Y":-1.5,
 			"interfaces": 
@@ -156,17 +202,21 @@
 					{
 						"name": "Loopback1", 
 						"ipv4": "6.6.6.6 255.255.255.255",
-						"neighbor":"No"
+						"neighbor":"No",
+						"config_ospf_mpls": true
+
 					},
 					{
 						"name": "GigabitEthernet1/0", 
 						"ipv4": "10.4.4.6 255.255.255.0",
-						"neighbor":"R4"
+						"neighbor":"R4",
+						"config_ospf_mpls": true
 					},
 					{
 						"name": "GigabitEthernet2/0", 
 						"ipv4": "10.3.3.6 255.255.255.0",
-						"neighbor":"R3"
+						"neighbor":"R3",
+						"config_ospf_mpls": true
 					}
 
 				]
