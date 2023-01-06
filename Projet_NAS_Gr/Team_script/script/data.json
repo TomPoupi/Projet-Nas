@@ -181,6 +181,18 @@
 						"ipv4": "10.2.2.5 255.255.255.0",
 						"neighbor":"R2",
 						"config_ospf_mpls": true
+					},
+					{
+						"name": "FastEthernet0/0", 
+						"ipv4": "20.1.11.11 255.255.255.255",
+						"neighbor":"R7",
+						"config_ospf_mpls": false
+					},
+					{
+						"name": "GigabitEthernet3/0", 
+						"ipv4": "20.1.22.11 255.255.255.255",
+						"neighbor":"R8",
+						"config_ospf_mpls": false
 					}
 
 				]
@@ -217,11 +229,118 @@
 						"ipv4": "10.3.3.6 255.255.255.0",
 						"neighbor":"R3",
 						"config_ospf_mpls": true
+					},
+					{
+						"name": "FastEthernet0/0", 
+						"ipv4": "20.1.44.44 255.255.255.255",
+						"neighbor":"R10",
+						"config_ospf_mpls": false
+					},
+					{
+						"name": "GigabitEthernet3/0", 
+						"ipv4": "20.1.33.44 255.255.255.255",
+						"neighbor":"R9",
+						"config_ospf_mpls": false
 					}
 
+				]
+		},
+		{
+			"name": "R7",
+			"role": "CE",
+			"vrf": [
+				{
+					"process":"110",	
+					"area" : "A1",
+					"router-id": "1.0.0.1",	
+					"rd": "110:14"
+				}
+			],
+			"X":-4,
+			"Y":2,
+			"interfaces": 
+				[
+					{
+						"name": "FastEthernet0/0", 
+						"ipv4": "20.1.11.1 255.255.255.255",
+						"neighbor":"R5"
+
+					}
+		
+				]
+		},
+		{
+			"name": "R8",
+			"role": "CE",
+			"vrf": [
+				{
+					"process":"110",	
+					"area" : "B2",
+					"router-id": "2.0.0.2",	
+					"rd": "110:23"
+				}
+			],
+			"X":-4,
+			"Y":1.5,
+			"interfaces": 
+				[
+					{
+						"name": "GigabitEthernet3/0", 
+						"ipv4": "20.1.22.2 255.255.255.255",
+						"neighbor":"R5"
+
+					}
+		
+				]
+		},
+		{
+			"name": "R9",
+			"role": "CE",
+			"vrf": [
+				{
+					"process":"110",	
+					"area" : "B3",
+					"router-id": "3.0.0.3",	
+					"rd": "110:23"
+				}
+			],
+			"X":4,
+			"Y":-2,
+			"interfaces": 
+				[
+					{
+						"name": "GigabitEthernet3/0", 
+						"ipv4": "20.1.33.3 255.255.255.255",
+						"neighbor":"R6"
+
+					}
+		
+				]
+		},
+		{
+			"name": "R10",
+			"role": "CE",
+			"vrf": [
+				{
+					"process":"110",	
+					"area" : "A4",
+					"router-id": "4.0.0.4",	
+					"rd": "110:14"
+				}
+			],
+			"X":4,
+			"Y":-1.5,
+			"interfaces": 
+				[
+					{
+						"name": "FastEthernet0/0", 
+						"ipv4": "20.1.44.4 255.255.255.255",
+						"neighbor":"R6"
+
+					}
+		
 				]
 		}
 
 	]
 }
-
