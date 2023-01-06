@@ -71,6 +71,17 @@ def tab_de_tab_link(routers) :
 def create_link(tab_link) :
     for i in range(0,len(tab_link)) :
         lab.create_link(tab_link[i][0][0], tab_link[i][0][1], tab_link[i][1][0], tab_link[i][1][1])
+        
+#fonction qui reccupere les voisins CE des PE
+def PE_neighbor (router):
+    tab_CE=[]
+    for j in range (0,len(router['interfaces'])):
+        for i in range (0,len(data['data'])):
+            if (data['data'][i]['name']==router['interfaces'][j]['neighbor']):
+                if (data['data'][i]['role'] == "CE"):
+                    tab_CE.append(data['data'][i])
+
+    return tab_CE
 
 
 
