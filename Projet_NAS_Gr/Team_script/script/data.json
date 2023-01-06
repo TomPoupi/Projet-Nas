@@ -159,6 +159,12 @@
 					"router-id": "5.5.5.5"	
 				}
 			],
+			"bgp":[
+				{
+					"process":"110",	
+					"router-id": "5.5.5.5"	
+				}
+			],
 			"X":-3,
 			"Y":1.5,
 			"interfaces": 
@@ -184,13 +190,13 @@
 					},
 					{
 						"name": "FastEthernet0/0", 
-						"ipv4": "20.1.11.11 255.255.255.255",
+						"ipv4": "20.1.11.11 255.255.255.0",
 						"neighbor":"R7",
 						"config_ospf_mpls": false
 					},
 					{
 						"name": "GigabitEthernet3/0", 
-						"ipv4": "20.1.22.11 255.255.255.255",
+						"ipv4": "20.1.22.11 255.255.255.0",
 						"neighbor":"R8",
 						"config_ospf_mpls": false
 					}
@@ -204,6 +210,12 @@
 				{
 					"process":"6",	
 					"area" : "0",
+					"router-id": "6.6.6.6"	
+				}
+			],
+			"bgp":[
+				{
+					"process":"110",	
 					"router-id": "6.6.6.6"	
 				}
 			],
@@ -232,13 +244,13 @@
 					},
 					{
 						"name": "FastEthernet0/0", 
-						"ipv4": "20.1.44.44 255.255.255.255",
+						"ipv4": "20.1.44.44 255.255.255.0",
 						"neighbor":"R10",
 						"config_ospf_mpls": false
 					},
 					{
 						"name": "GigabitEthernet3/0", 
-						"ipv4": "20.1.33.44 255.255.255.255",
+						"ipv4": "20.1.33.44 255.255.255.0",
 						"neighbor":"R9",
 						"config_ospf_mpls": false
 					}
@@ -249,10 +261,8 @@
 			"name": "R7",
 			"role": "CE",
 			"vrf": [
-				{
-					"process":"110",	
+				{	
 					"area" : "A1",
-					"router-id": "1.0.0.1",	
 					"rd": "110:14"
 				}
 			],
@@ -262,9 +272,14 @@
 				[
 					{
 						"name": "FastEthernet0/0", 
-						"ipv4": "20.1.11.1 255.255.255.255",
+						"ipv4": "20.1.11.1",
 						"neighbor":"R5"
 
+					},
+					{
+						"name": "Loopback1", 
+						"ipv4": "1.0.0.1 255.255.255.255",
+						"neighbor":"No"
 					}
 		
 				]
@@ -273,10 +288,8 @@
 			"name": "R8",
 			"role": "CE",
 			"vrf": [
-				{
-					"process":"110",	
+				{	
 					"area" : "B2",
-					"router-id": "2.0.0.2",	
 					"rd": "110:23"
 				}
 			],
@@ -286,9 +299,14 @@
 				[
 					{
 						"name": "GigabitEthernet3/0", 
-						"ipv4": "20.1.22.2 255.255.255.255",
+						"ipv4": "20.1.22.2",
 						"neighbor":"R5"
 
+					},
+					{
+						"name": "Loopback1", 
+						"ipv4": "2.0.0.2 255.255.255.255",
+						"neighbor":"No"
 					}
 		
 				]
@@ -297,10 +315,8 @@
 			"name": "R9",
 			"role": "CE",
 			"vrf": [
-				{
-					"process":"110",	
+				{	
 					"area" : "B3",
-					"router-id": "3.0.0.3",	
 					"rd": "110:23"
 				}
 			],
@@ -310,9 +326,14 @@
 				[
 					{
 						"name": "GigabitEthernet3/0", 
-						"ipv4": "20.1.33.3 255.255.255.255",
+						"ipv4": "20.1.33.3",
 						"neighbor":"R6"
 
+					},
+					{
+						"name": "Loopback1", 
+						"ipv4": "3.0.0.3 255.255.255.255",
+						"neighbor":"No"
 					}
 		
 				]
@@ -321,10 +342,8 @@
 			"name": "R10",
 			"role": "CE",
 			"vrf": [
-				{
-					"process":"110",	
-					"area" : "A4",
-					"router-id": "4.0.0.4",	
+				{	
+					"area" : "A4",	
 					"rd": "110:14"
 				}
 			],
@@ -334,9 +353,14 @@
 				[
 					{
 						"name": "FastEthernet0/0", 
-						"ipv4": "20.1.44.4 255.255.255.255",
+						"ipv4": "20.1.44.4",
 						"neighbor":"R6"
 
+					},
+					{
+						"name": "Loopback1", 
+						"ipv4": "4.0.0.4 255.255.255.255",
+						"neighbor":"No"
 					}
 		
 				]
