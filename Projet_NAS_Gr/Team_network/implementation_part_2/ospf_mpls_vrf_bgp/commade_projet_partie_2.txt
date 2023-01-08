@@ -223,7 +223,7 @@ PE1#configure terminal
 PE1(config)#router bgp 110						// AS 110 des routeurs de coeur ( avec PE1 et PE4 )
 PE1(config-router)#bgp router-id 11.11.11.11				// mon router-id en bgp c'est ce qu'on va voir si on fait des show
 PE1(config-router)#neighbor 44.44.44.44 remote-as 110			// iBGP avec PE4 on va déclarer comme neighbor l'address de loopback de PE4
-PE1(config-router)#neighbor 44.44.44.44 update source loopback1		// pour qu'on puisse pinger l'address de loopback de PE4 il faut aussi déclarer que je dois utiliser mon address de loopback la : 11.11.11.11/32
+PE1(config-router)#neighbor 44.44.44.44 update-source loopback1		// pour qu'on puisse pinger l'address de loopback de PE4 il faut aussi déclarer que je dois utiliser mon address de loopback la : 11.11.11.11/32
 PE1(config-router)#address-family vpnv4
 PE1(config-router-af)#neighbor 44.44.44.44 activate			// j'active mon lien en vpn
 PE1(config-router-af)#neighbor 44.44.44.44 next-hop-seft		// cette commande permet de faire en sorte que tous les packets passant par 44.44.44.44 passent par mon router pour pinger mon CE1 ( sans ça PE4 et CE4 ne sait pas comment router à CE1 same pour CE2 et CE3)		

@@ -1,5 +1,4 @@
 import gns3fy
-#from write_config import *
 from write_config_telnet import *
 import json
 import multiprocess
@@ -71,7 +70,7 @@ def tab_de_tab_link(routers) :
 def create_link(tab_link) :
     for i in range(0,len(tab_link)) :
         lab.create_link(tab_link[i][0][0], tab_link[i][0][1], tab_link[i][1][0], tab_link[i][1][1])
-        
+
 #fonction qui reccupere les voisins CE des PE
 def PE_neighbor (router):
     tab_CE=[]
@@ -82,8 +81,17 @@ def PE_neighbor (router):
                     tab_CE.append(data['data'][i])
 
     return tab_CE
+#print(PE_neighbor(data['data'][5]))
 
+def other_PE(router):
+    tab_PE=[]
+    for i in range (0,len(data['data'])):
+        if not(data['data'][i]['name']==router['name']):
+            if (data['data'][i]['role'] == "PE"):
+                tab_PE.append(data['data'][i])
 
+    return tab_PE
+#print(other_PE(data['data'][5]))
 
 # fonction qui configure en telnet les routers
 def config_router(i,router):
@@ -95,9 +103,11 @@ def config_router(i,router):
             break
     #fonction config en telnet, r.console = port tcp , pour connection avec le router
     if router["role"]=="PE" :
-        config_telnet_PE(router,i,r.console)
+        config_telnet_PE(router,i,r.console,PE_neighbor(router),other_PE(router))
     elif router["role"]=="R" :
         config_telnet_R(router,i,r.console)
+    elif router["role"]=="CE" :
+        config_telnet_CE(router,i,r.console,other_PE(router))
     else:
         config_telnet(router,i,r.console)
 #print(tab_dictionnaire_link(data['data']))
@@ -111,16 +121,16 @@ if __name__ == '__main__':
     lab.get()
     lab.start_nodes()
 
-    #start des process pour config les routers, 1 process/ router
+    # start des process pour config les routers, 1 process/ router
     processes = [multiprocess.Process(target=config_router, args=(i, data['data'][i])) for i in range(len(data['data']))]
 
 
     for process in processes:
-        process.start()
+       process.start()
 
 
     for process in processes:
-        process.join()
+       process.join()
 
 
 
