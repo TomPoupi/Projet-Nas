@@ -250,6 +250,11 @@ def config_telnet_PE(router,i,port,CE_neighbors, PE_neighbors) :
         tn.write(b"rd "+ce["vrf"][0]["rd"].encode('ascii')+b"\r\n")
         tn.write(b"route-target import "+ce["vrf"][0]["rd"].encode('ascii')+b"\r\n")
         tn.write(b"route-target export "+ce["vrf"][0]["rd"].encode('ascii')+b"\r\n")
+        if ce["vrf"][0]["route"]!= None :
+            for i in range(len(ce["vrf"][0]["route"])):
+                tn.write(b"route-target import "+ce["vrf"][0]["route"][i]["name"].encode('ascii')+b"\r\n")
+                tn.write(b"route-target export "+ce["vrf"][0]["route"][i]["name"].encode('ascii')+b"\r\n")
+
         tn.write(b"exit\r\n")
     
     for interface in router["interfaces"] :
@@ -275,7 +280,6 @@ def config_telnet_PE(router,i,port,CE_neighbors, PE_neighbors) :
             if ce["interfaces"][i]["neighbor"]==router["name"]:
                 Int=ce["interfaces"][i]["ipv4"]
                 myInt = Int.split( )
-
         tn.write(b"ip route vrf "+ce["vrf"][0]["name"].encode('ascii')+b" "+Loopback.encode('ascii')+b" "+myInt[0].encode('ascii') + b"\r\n")
 
     #Partie BGP
@@ -299,6 +303,12 @@ def config_telnet_PE(router,i,port,CE_neighbors, PE_neighbors) :
         tn.read_until(router["name"].encode('ascii')+ b"(config-router-af)#")
         tn.write(b"redistribute static\r\n")
         tn.write(b"redistribute connected\r\n")
+        for interface in ce["interfaces"] :
+            if interface["neighbor"]==router["name"]:
+                Int=interface["ipv4"]
+                myInt = Int.split( )
+                tn.write(b"neighbor "+myInt[0].encode('ascii')+b" remote-as "+ce["bgp"][0]["process"].encode('ascii')+b"\r\n")
+                tn.write(b"neighbor "+myInt[0].encode('ascii')+b" activate"+b"\r\n")
         tn.write(b"exit\r\n")
         tn.read_until(router["name"].encode('ascii')+ b"(config-router)#")
 
@@ -362,14 +372,24 @@ def config_telnet_CE(router,i,port,PE_neighbors) :
         # j'att que l'interface soit bien up avant de leave
         tn.read_until(b"Line protocol on Interface "+ interface["name"].encode('ascii') + b", changed state to up")
         tn.write(b"exit\r\n")
+    
+    #BGP
+    tn.write(b"router bgp "+router["bgp"][0]["process"].encode('ascii')+ b"\r\n")
+    tn.read_until(router["name"].encode('ascii')+ b"(config-router)#")
+    tn.write(b"bgp router-id "+router["bgp"][0]["router-id"].encode('ascii')+b"\r\n")
+    tn.write(b"address-family ipv4\r\n")
+    tn.read_until(router["name"].encode('ascii')+ b"(config-router-af)#")
 
     for pe in PE_neighbors:
         for i in range(len(pe["interfaces"])):
             if pe["interfaces"][i]["neighbor"]==router["name"]:
                 Int=pe["interfaces"][i]["ipv4"]
                 myInt = Int.split( )
-                tn.write(b"ip route 0.0.0.0 0.0.0.0 "+myInt[0].encode('ascii')+ b"\r\n")   
+                tn.write(b"neighbor "+myInt[0].encode('ascii')+b" remote-as "+pe["bgp"][0]["process"].encode('ascii')+b"\r\n")
+                tn.write(b"neighbor "+myInt[0].encode('ascii')+b" activate"+b"\r\n")  
 
+    tn.write(b"exit\r\n")
+    tn.write(b"exit\r\n")
     tn.write(b"exit\r\n")
 
     #j'att que la modification soit bien prise en compte avant leave la connection avec tn.close()
