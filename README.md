@@ -6,7 +6,7 @@
 Celon les différents objectif du projet, le github se découpe celon 2 dossiers principaux
 
 - Team_network <br />
-Il contient les projets GNS3 de l'implémentation modèle utilisée ansi qu'un plan de cette implémentation. Ainsi qu'un fichier texte récapitulant les commandes de configuration des routeurs à réaliser pour l'implémentation des différents protocoles.
+Il contient les projets GNS3 de l'implémentation modèle utilisée ainsi qu'un plan de cette dernière. On y trouve aussi un fichier texte récapitulant les commandes de configuration des routeurs à réaliser pour l'implémentation des différents protocoles.
 
 - Team_script <br />
 Il contient les scripts en python réalisés pour effectuer les configurations faites dans le dossier network de manière automatique pour un projet GNS3. Où les différentes données servant à cette implémantation sont organisées et stockées dans un fichier JSON.
