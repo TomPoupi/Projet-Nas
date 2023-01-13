@@ -42,7 +42,8 @@ python ./script.py`
 Notre fichier "data.json" représente notre configuration sous un format spécifique.
 Il présente la structure data qui contient tous les routeurs de notre réseau.
 On spécifie pour chaque routeur les informations suivantes :
-	 ** Name du routeur
+	
+	** Name du routeur
 	 ** Son role [ CE , PE , R ]
 	 ** Sa position X,Y
 	 ** Les interfaces de ce routeur: 
@@ -53,13 +54,16 @@ On spécifie pour chaque routeur les informations suivantes :
 	
 Et on ajoute des informations sur les configurations VRF, BGP, OSPF, MPLS 
 Ça dépend du Rôle du routeur
+
 => Routeur : R 
-   	 ** ospf :
+   	
+	** ospf :
             process(process-id)
             area 
             router-id
 => Routeur : PE
-	 ** ospf :
+	
+	** ospf :
             process(process-id)
             area 
             router-id
@@ -70,7 +74,8 @@ Et on ajoute des informations sur les configurations VRF, BGP, OSPF, MPLS
 Et on ajoute dans les configs des interfaces des PE une presecion sur si on fait MPLS sur cette interface ou pas ==>> "config_ospf_mpls": false OR true
 
 => Routeur : CE
-  	** bgp :
+  	
+	** bgp :
             AS 
             router-id
   	** vrf :
