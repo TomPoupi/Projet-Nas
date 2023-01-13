@@ -28,7 +28,7 @@ pip install pydantic=1.9
 
 #### Paramètres dans GNS3:
 Avant de pouvoir lancer le script, ouvrez un projet GNS3. <br />
-Dans **Edit > Preferences > Server**, faire attention à paramétrerle host binding en localhost et le port au 3090 TCP. <br />
+Dans **Edit > Preferences > Server**, faire attention à paramétrer le **Host binding** en **localhost** et le **port** au **3090 TCP**. <br />
 Pour que la connexion se fasse il faut aussi faire attention à avoir cocher la case *"Allow console connections to any local IP address"*
 
 #### Lancer le script
