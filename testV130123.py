@@ -155,12 +155,14 @@ def back1():
 def Def_interface(tab):
 
 	nb_voisins = tab[4]
-	resultat = [['0']*3]*int(nb_voisins)
+	resultat = []
+	print(resultat)
 	
 	for widget in root.winfo_children():
 		widget.destroy()
     
 	for i in range(int(nb_voisins)):
+		print("je suis dans la boucle1")
 		first_row_frame = tk.Frame(root)
 		first_row_frame.pack(pady=10)
 
@@ -179,14 +181,17 @@ def Def_interface(tab):
 		ip_label.pack()
 		ip_entry = tk.Entry(root)
 		ip_entry.pack()
-
-	for i in range(nb_voisins):
-		id_voisin=str(id_voisin_entry.get())
-		interface=str(interface_entry.get())
-		ip=str(ip_entry.get())
-		resultat[i][0] = interface 
-		resultat[i][1] = ip
-		resultat[i][2] = id_voisin
+		
+		print("on a fait les entry")
+		#id_voisin=str(id_voisin_entry.get())
+		#interface=str(interface_entry.get())
+		#ip=str(ip_entry.get())
+		print(ip_entry)
+		print("on a fait les get")
+		
+		resultat.append([id_voisin_entry, interface_entry, ip_entry])
+		#print(resultat)
+		print(str(resultat[i][0].get()))
   
 	submit_button = tk.Button(root, text="Soumettre", command=functools.partial(submit_interface,tab, resultat))
 	submit_button.pack()
