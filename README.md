@@ -39,7 +39,7 @@ node ./script.py`
 ## Organisation des données (JSON)
 
 ## Implémentation réalisée
-Plan du modèle servi pour l'implémentation
+Plan du modèle servi pour l'implémentation 2
 
 -Le cœur du réseau est constitué des routeurs « provider » R1, R2, R3 et R4. On a sur les bordures, les routeurs PE1 et PE4 (provider edge). Et finalement les clients 
 (customer edge) reliés à leurs PE : CE1, CE2, CE3 et CE4. 
