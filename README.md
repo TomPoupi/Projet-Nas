@@ -50,7 +50,7 @@ Il présente la structure data qui contient tous les routeurs de notre réseau.
 On spécifie pour chaque routeur les informations suivantes :
 	
 	** Name du routeur
-	 ** Son role [ CE , PE , R ]
+	 ** Son role ( CE ou PE ou R )
 	 ** Sa position X,Y
 	 ** Les interfaces de ce routeur: 
 	      Pour chaque interface on specifie :
@@ -85,22 +85,32 @@ Et on ajoute dans les configs des interfaces des PE une presecion sur si on fait
 => Routeur : CE
   	
 	** bgp :
-            AS 
+            process(Num de AS)
             router-id
   	** vrf :
             Name de la vrf
             rd = route distinguisher 
-            route = route target 
+            route = [route target1 , route target2] 
 
 
 ## Implémentation réalisée
-Plan du modèle servi pour l'implémentation 2
+Plan du modèle servi pour l'implémentation 3
+(exemple avec le schéma du README)
 
--Le cœur du réseau est constitué des routeurs « provider » R1, R2, R3 et R4. On a sur les bordures, les routeurs PE1 et PE4 (provider edge). Et finalement les clients 
+-Le cœur du réseau est constitué des routeurs R1, R2, R3 et R4. On a sur les bordures, les routeurs PE1 et PE4 (provider edge). Et finalement les clients 
 (customer edge) reliés à leurs PE : CE1, CE2, CE3 et CE4. 
 
 -On a les protocoles MPLS et LDP sur les 6 routeurs : R1, R2, R3, R4, PE1 et PE4. Ce protocole permet de créer des labels et du coup setup plus rapidement les routeurs à chaque changement de topologie. Ces routeurs n’ont besoin que d’un seul label pour envoyer un packet vers un autre routeur. 
 Un protocole OSPF dans le core (backbone) donc aussi sur les 6 routeurs (R1, R2, R3, R4, PE1 et PE4) ; l’objectif est d’établir la table de routage pour mettre en évidence l’état des liens et les tables d’adjacence donc tous les composants du coeur connaissent leurs voisins et vont choisir les labels pour ensuite les annoncer à ces voisins. 
 
--On implémente le protocole MP-BGP (extension au protocole BGP) sur les PE pour qu’ils puissent savoir quelles routes suivre pour envoyer les paquets dans le réseau de coeur : on utilise le protocole MP-BGP au lieu de BGP car ce dernier peut transporter plusieurs protocoles et d’étendre les capacités de BGP pour pouvoir transporter d’autres adresses telles que les adresses VPN niveau 3. Pour pouvoir connecter les sites du client A ou du client B entre eux, on va devoir créer une route vpn entre CE1/CE4 et CE2/CE3. Donc on aura un VRF par client pour qu’ils puissent s’envoyer des paquets sans partager leurs routes entre eux.
+-On implémente le protocole BGP sur les PE pour qu’ils puissent savoir quelles routes suivre pour envoyer les paquets dans le réseau de coeur, Pour pouvoir connecter les sites du client A ou du client B entre eux, on va devoir créer une route vpn entre CE1/CE5 CE1/CE4 et CE2/CE3. Donc on aura un VRF par client pour qu’ils puissent s’envoyer des paquets sans partager leurs routes entre eux.
+
+-Aussi les routers CEs ne peuvent pas communiquer avec les routers de coeur (R1 R2 R3 R4) car ce n'est pas qu'on souhaite
+
+## Le SCRIPT
+
+le script réalise l'implémentation 3, 
+- Chaque interface des routers Rôle = "R" et chaque interface des routers Rôle = "PE" connecté au "R" sont config en OSPF/MPLS
+- les interfaces des routers Rôle = "PE" sont connecté en BGP avec les interfaces des routers Rôle = "CE"
+- les CEs peuvent être connecté à plusieurs PEs et un CE peut avoir plusieur route-target
 
