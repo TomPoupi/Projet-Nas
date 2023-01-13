@@ -44,11 +44,11 @@ Il présente la structure data qui contient tous les routeurs de notre réseau.
 
 On spécifie pour chaque routeur les informations suivantes :
 	
-	** Name du routeur
+	 ** Name du routeur
 	 ** Son role [ CE , PE , R ]
 	 ** Sa position X,Y
 	 ** Les interfaces de ce routeur: 
-	      Pour chaque interface on specifie :
+	    Pour chaque interface on specifie :
 			    -> Name de l'interface 
 			    -> L'adresse IPv4 
 			    -> On precise aussi le neighbor de ce Routeur sur cette interface 
