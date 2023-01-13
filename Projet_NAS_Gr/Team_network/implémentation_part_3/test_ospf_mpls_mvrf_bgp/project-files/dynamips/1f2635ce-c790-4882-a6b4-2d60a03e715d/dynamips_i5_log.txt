@@ -1,0 +1,66 @@
+Dec 23 22:12:03.200 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Dec 23 22:12:03.201 HYPERVISOR: Started on TCP port = 51939.
+Dec 23 22:12:03.702 HYPERVISOR: exec_cmd: hypervisor version 
+Dec 23 22:12:03.702 HYPERVISOR: exec_cmd: hypervisor working_dir D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips 
+Dec 23 22:12:03.703 GENERAL: working_dir=D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips
+Dec 23 22:12:03.704 HYPERVISOR: exec_cmd: hypervisor working_dir D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips\f28257fc-5a16-4c18-9606-eeb021551207 
+Dec 23 22:12:03.705 GENERAL: working_dir=D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips\f28257fc-5a16-4c18-9606-eeb021551207
+Dec 23 22:12:03.705 HYPERVISOR: exec_cmd: vm create PE1 7 c7200 
+Dec 23 22:12:03.710 VM: VM PE1 created.
+Dec 23 22:12:03.711 HYPERVISOR: exec_cmd: vm set_con_tcp_port PE1 5009 
+Dec 23 22:12:03.711 HYPERVISOR: exec_cmd: c7200 get_mac_addr PE1 
+Dec 23 22:12:03.712 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:12:03.712 HYPERVISOR: exec_cmd: vm slot_add_binding PE1 0 0 C7200-IO-FE 
+Dec 23 22:12:03.713 HYPERVISOR: exec_cmd: vm set_disk0 PE1 0 
+Dec 23 22:12:03.714 HYPERVISOR: exec_cmd: vm set_exec_area PE1 64 
+Dec 23 22:12:03.716 HYPERVISOR: exec_cmd: vm set_ios PE1 C:/Users/tpoup/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Dec 23 22:12:03.717 HYPERVISOR: exec_cmd: c7200 set_mac_addr PE1 ca07.45f0.0000 
+Dec 23 22:12:03.718 HYPERVISOR: exec_cmd: vm set_nvram PE1 512 
+Dec 23 22:12:03.718 HYPERVISOR: exec_cmd: vm set_ram PE1 512 
+Dec 23 22:12:03.719 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:12:03.719 HYPERVISOR: exec_cmd: vm slot_add_binding PE1 1 0 PA-GE 
+Dec 23 22:12:03.720 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:12:03.720 HYPERVISOR: exec_cmd: vm slot_add_binding PE1 2 0 PA-GE 
+Dec 23 22:12:03.721 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:12:03.721 HYPERVISOR: exec_cmd: vm slot_add_binding PE1 3 0 PA-GE 
+Dec 23 22:12:03.722 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:12:03.722 HYPERVISOR: exec_cmd: vm slot_add_binding PE1 4 0 PA-GE 
+Dec 23 22:12:03.723 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:12:03.723 HYPERVISOR: exec_cmd: vm slot_add_binding PE1 5 0 PA-GE 
+Dec 23 22:12:03.724 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:12:03.724 HYPERVISOR: exec_cmd: vm slot_add_binding PE1 6 0 PA-GE 
+Dec 23 22:12:07.182 HYPERVISOR: exec_cmd: nio create_udp udp-45650ba2-dfde-4ce3-8219-ffbb66e8db24 10008 127.0.0.1 10009 
+Dec 23 22:12:07.435 HYPERVISOR: exec_cmd: vm slot_add_nio_binding PE1 1 0 udp-45650ba2-dfde-4ce3-8219-ffbb66e8db24 
+Dec 23 22:12:07.436 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:12:08.430 HYPERVISOR: exec_cmd: nio create_udp udp-a625c59d-289a-4be2-b8c0-775081dff24e 10026 127.0.0.1 10027 
+Dec 23 22:12:08.433 HYPERVISOR: exec_cmd: vm slot_add_nio_binding PE1 2 0 udp-a625c59d-289a-4be2-b8c0-775081dff24e 
+Dec 23 22:12:08.433 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:12:09.265 HYPERVISOR: exec_cmd: nio create_udp udp-77c08fb7-55d0-4065-937e-31fc5ae8d86f 10052 127.0.0.1 10053 
+Dec 23 22:12:09.269 HYPERVISOR: exec_cmd: vm slot_add_nio_binding PE1 0 0 udp-77c08fb7-55d0-4065-937e-31fc5ae8d86f 
+Dec 23 22:12:09.270 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:15:13.276 HYPERVISOR: exec_cmd: nio create_udp udp-c5e1a260-8c26-4de7-a947-44620bd36c47 10004 127.0.0.1 10005 
+Dec 23 22:15:13.280 HYPERVISOR: exec_cmd: vm slot_add_nio_binding PE1 3 0 udp-c5e1a260-8c26-4de7-a947-44620bd36c47 
+Dec 23 22:15:13.280 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:26:16.692 HYPERVISOR: exec_cmd: vm set_ios PE1 C:/Users/tpoup/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Dec 23 22:26:27.812 HYPERVISOR: exec_cmd: vm set_ios PE1 C:/Users/tpoup/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Dec 23 22:26:31.278 HYPERVISOR: exec_cmd: vm set_ios PE1 C:/Users/tpoup/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Dec 23 22:41:54.350 HYPERVISOR: exec_cmd: vm set_ghost_status PE1 2 
+Dec 23 22:41:54.352 HYPERVISOR: exec_cmd: vm set_ghost_file PE1 D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part2\test_ospf_mpls_vrf_bgp\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Dec 23 22:41:54.352 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 22:41:54.549 HYPERVISOR: exec_cmd: vm set_config PE1 configs\i7_startup-config.cfg configs\i7_private-config.cfg 
+Dec 23 22:41:54.550 HYPERVISOR: exec_cmd: vm start PE1 
+Dec 23 22:42:25.513 HYPERVISOR: exec_cmd: vm extract_config PE1 
+Dec 23 22:54:25.774 HYPERVISOR: exec_cmd: vm extract_config PE1 
+Dec 23 23:07:21.283 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 23:07:21.285 HYPERVISOR: exec_cmd: vm stop PE1 
+Dec 23 23:07:21.502 VM: VM PE1 shutdown.
+Dec 23 23:07:21.503 HYPERVISOR: exec_cmd: vm extract_config PE1 
+Dec 23 23:09:36.467 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 23:09:36.468 HYPERVISOR: exec_cmd: vm extract_config PE1 
+Dec 23 23:09:36.681 HYPERVISOR: exec_cmd: vm get_status PE1 
+Dec 23 23:09:36.683 HYPERVISOR: exec_cmd: vm extract_config PE1 
+Dec 23 23:09:36.686 HYPERVISOR: exec_cmd: vm delete PE1 
+Dec 23 23:09:36.686 VM: VM PE1 destroyed.
+Dec 23 23:09:36.688 HYPERVISOR: exec_cmd: hypervisor stop 
+Dec 23 23:09:36.957 HYPERVISOR: Stopped.
+Dec 23 23:09:36.957 GENERAL: reset done.

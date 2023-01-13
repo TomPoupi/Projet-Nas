@@ -248,8 +248,8 @@ def config_telnet_PE(router,i,port,CE_neighbors, PE_neighbors) :
         tn.write(b"ip vrf "+ce["vrf"][0]["name"].encode('ascii')+b"\r\n")
         tn.read_until(router["name"].encode('ascii')+ b"(config-vrf)#")
         tn.write(b"rd "+ce["vrf"][0]["rd"].encode('ascii')+b"\r\n")
-        tn.write(b"route-target import "+ce["vrf"][0]["rd"].encode('ascii')+b"\r\n")
-        tn.write(b"route-target export "+ce["vrf"][0]["rd"].encode('ascii')+b"\r\n")
+        # tn.write(b"route-target import "+ce["vrf"][0]["rd"].encode('ascii')+b"\r\n")
+        # tn.write(b"route-target export "+ce["vrf"][0]["rd"].encode('ascii')+b"\r\n")
         if ce["vrf"][0]["route"]!= None :
             for i in range(len(ce["vrf"][0]["route"])):
                 tn.write(b"route-target import "+ce["vrf"][0]["route"][i]["name"].encode('ascii')+b"\r\n")

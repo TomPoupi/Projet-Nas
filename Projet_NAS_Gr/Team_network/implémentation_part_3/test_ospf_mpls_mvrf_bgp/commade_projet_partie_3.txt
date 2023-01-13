@@ -1,0 +1,355 @@
+GROUPE RÉSEAUX CONFIGURATION PROJET PARTIE 3 :
+par tom poupard
+
+ATTENTION LE GNS3 ASSOCIÉ est pas à jour certaine route avec les CE-PE sont encore static
+(voir implémentation 2) et les noms de route distinguisher ne sont pas à jour aussi.
+
+l'idée de cette partie faire connecter les sites du client en A entre eux les sites du client B entre eux
+amélioration : désormait CE1 possède 2 clients A(14) et C(15) 
+( voir le schéma pour avoir la topologie du réseau)
+
+Part1 ipv4 :
+--------------------------------------------------------------------------------------------------------------------
+--CE1 :
+CE1#configure terminal
+CE1(config)#interface FastEthernet0/0				
+CE1(config-if)#ip address 20.1.11.1 255.255.255.0			// en ipv4 : address + mask de sous réseau 
+CE1(config-if)#no shutdown
+CE1(config-if)#exit
+CE1(config)#exit
+CE1#write								// jamais oublier de write
+
+--PE1 :
+PE1#configure terminal
+PE1(config)#interface FastEthernet0/0				
+PE1(config-if)#ip address 20.1.11.11 255.255.255.0
+PE1(config-if)#no shutdown
+PE1(config-if)#exit
+PE1(config)#interface GigabitEthernet1/0				
+PE1(config-if)#ip address 10.1.1.11 255.255.255.0
+PE1(config-if)#no shutdown
+PE1(config)#interface GigabitEthernet2/0				
+PE1(config-if)#ip address 10.2.2.11 255.255.255.0
+PE1(config-if)#no shutdown
+PE1(config)#interface GigabitEthernet3/0				
+PE1(config-if)#ip address 20.1.22.11 255.255.255.0
+PE1(config-if)#no shutdown
+PE1(config-if)#exit
+PE1(config)#exit
+PE1#show running-config 						//check si tout va bien
+PE1#write
+
+
+//...
+//faire pareil pour chaque router du réseau 
+--------------------------------------------------------------------------------------------------------------------
+
+Part2 ospf :
+--------------------------------------------------------------------------------------------------------------------
+// ospf est config entre les router (PE1 PE4 R1 R2 R3 R4)
+ 
+--PE1:
+PE1#configure terminal
+PE1(config)#router ospf 11						// le 11 est le <process-id>, le chiffre importe peu en lui même mais vu qu'on va s'en servir quand on va config les interfaces du coup autant mettre 1 pour R1, 2 pour R2 etc... 
+PE1(config-router)#router-id 11.11.11.11				// le 11.11.11.11 est le <router-id>, même délire sauf qu'on va pas plus s'en servir que ça, ça sera juste l'id qu'on vera quand on fera des show ospf neighbor et c'est ce qui utilisé comme id par défault par mpls
+PE1(config-router)#exit
+PE1(config)#interface GigabitEthernet1/0
+PE1(config-if)#ip ospf 11 area 0					//"PE1(config-if)#ospf <process-id> area <area-id>", on peut diviser ton sous réseau en aire, l'aire 0 correspond au backbone et pas plus de 15 router par aire. faire cette config sur chaque interface où tu veux faire de l'ospf
+PE1(config-if)#exit
+PE1(config)#interface GigabitEthernet2/0
+PE1(config-if)#ip ospf 11 area 0					
+PE1(config-if)#exit
+PE1(config)#exit
+PE1#write
+
+--R1:
+R1#configure terminal
+R1(config)#router ospf 1
+R1(config-router)#router-id 1.1.1.1
+R1(config-router)#exit
+R1(config)#interface GigabitEthernet1/0
+R1(config-if)#ip ospf 1 area 0
+R1(config)#interface GigabitEthernet3/0
+R1(config-if)#ip ospf 1 area 0
+R1(config)#interface GigabitEthernet4/0
+R1(config-if)#ip ospf 1 area 0
+R1(config-if)#exit
+R1(config)#exit
+R1#write
+R1#show ip ospf neighbor						// connaitre ses neighbors
+R1#show ip ospf database						// avoir toutes infos des area des router et leur interfaces qui y sont
+R1#show ip ospf database router						// donne des infos sur ton router
+R1#show ip route							// montre tous les routes dispo 
+
+//...
+//faire pareil pour les router (PE4 R2 R3 R4)
+--------------------------------------------------------------------------------------------------------------------
+
+Part2,5 interface de loopback:
+--------------------------------------------------------------------------------------------------------------------
+//Étape obligatoire si tu veux utiliser mpls sur cette config il faut au bout des router de chaque AS (les PE) config une interface de loopback et le mettre dans l'ospf
+//Après c'est mieux de le faire sur tout les routers de ton réseaux c'est ce que j'ai fait
+
+--PE1:
+PE1#configure terminal
+PE1(config)#interface Loopback1 					// ça créer et up directement une interface virtuelle (loopback) du router
+PE1(config-if)#ip address 11.11.11.11 255.255.255.255
+PE1(config-if)#ip ospf 11 area 0					// enable interface à ospf dans l'aire 0
+PE1(config-if)#exit
+PE1(config)#exit
+PE1#write
+
+//...
+//faire pareil pour tous les routers de ton réseaux
+--------------------------------------------------------------------------------------------------------------------
+
+Part3 mpls/ldp :
+--------------------------------------------------------------------------------------------------------------------
+// mpls est config entre les router (R1 PE1 R2 R3 R4 PE4)
+// mpls permet de créer des labels et du coup setup plus rapidement mon routeur à chaque changement de topologie 
+// routers ont besoin qu'un seul label envoyer un packet vers un autre router 
+
+// pour les routers de coeur :
+--R1:
+R1#configure terminal
+R1(config)#mpls ip							//enable mpls sur le router
+R1(config)#mpls label protocol ldp					//enable le protocole ldp avec mpls
+R1(config)#mpls ldp router-id Loopback1					// ici on doit mettre qu'on veut faire mpls/ldp sur mon interface de loopback que ça passe par cette interface pour transmettre mon label			
+R1(config)#interface GigabitEthernet1/0					// activer mpls sur chaque interface
+R1(config-if)#mpls ip
+R1(config-if)#exit
+R1(config)#interface GigabitEthernet3/0
+R1(config-if)#mpls ip
+R1(config-if)#exit
+R1(config)#interface GigabitEthernet4/0
+R1(config-if)#mpls ip
+R1(config-if)#exit
+R1(config)#exit
+//...
+// (faire pareil pour R2,R3,R4)
+
+
+// pour les router de bordure :
+--PE1:
+PE1#configure terminal
+PE1(config)#mpls ip							
+PE1(config)#mpls label protocol ldp					
+PE1(config)#mpls ldp router-id Loopback1				// ici on doit mettre qu'on veut faire mpls/ldp sur mon interface de loopback que ça passe par cette interface pour transmettre mon label
+PE1(config)#interface GigabitEthernet1/0				
+PE1(config-if)#mpls ip
+PE1(config-if)#exit
+PE1(config)#interface GigabitEthernet2/0
+PE1(config-if)#mpls ip
+PE1(config-if)#exit
+PE1(config)#exit
+PE1#write
+PE1#show mpls interfaces
+PE1#show mpls ldp discovery
+PE1#show mpls ldp neighbor
+PE1#show mpls forwarding
+PE1#write
+// faire pareil pour (PE4)
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+Part4.1 MP-BGP VRF :
+--------------------------------------------------------------------------------------------------------------------
+// router concerné (PE1 PE2 PE4)
+// on va créer une route vpn entre CE1/CE4 (les A) et entre CE2/CE3 (les B) (voir topologie du réseaux) ainsi que CE1/CE5 (avec A1(15) et C5(15))
+// pour toute cette partie la config sera uniquement sur PE1 et PE4
+
+--PE1:
+PE1#configure terminal
+PE1(config)#ip vrf A1							// nom de la vrf A1 est le site 1 du client A
+PE1(config-vrf)#rd 110:1						// rd AS:idvrf, 14 est l'id vrf du client A, il doit être la même pour la config du router PE4 avec la vrf A4 ( site 4 du client A)
+PE1(config-vrf)#route-target import 110:14				// pour que A1 puisse recevoir les routes venant de A4 à partir du router PE1
+PE1(config-vrf)#route-target export 110:14				// pour que A4 puisse recevoir les routes venant de A1 à partir du router PE1
+PE1(config-vrf)#route-target import 110:15				// pour connecter CE1 et CE5
+PE1(config-vrf)#route-target export 110:15
+PE1(config-vrf)#exit
+PE1(config)#ip vrf B2							//same... avec client B, site B2 pour PE1 et site B3 pour PE4
+PE1(config-vrf)#rd 110:2
+PE1(config-vrf)#route-target import 110:23
+PE1(config-vrf)#route-target export 110:23
+PE1(config-vrf)#exit
+PE1(config)#interface FastEthernet0/0					
+PE1(config-if)#ip vrf forwarding A1					// activer vrf sur l'interface connecté à la vrf A1
+PE1(config-if)#ip address 20.1.11.11 255.255.255.0			// pb la commande anterieur enleve l'adresse ip du coup il faut la remettre
+PE1(config-if)#no shutdown						// pas sur que ce soit necessaire mais dans le doute vaut mieux faire ça
+PE1(config-if)#exit
+PE1(config)#interface GigabitEthernet3/0				//same...
+PE1(config-if)#ip vrf forwarding B2
+PE1(config-if)#ip address 20.1.22.11 255.255.255.0
+PE1(config-if)#no shutdown
+PE1(config-if)#exit
+
+--PE2:
+PE2#configure terminal
+PE2(config)#ip vrf C5							
+PE2(config-vrf)#rd 110:5					
+PE2(config-vrf)#route-target import 110:15				// pour connecter CE1 et CE5
+PE2(config-vrf)#route-target export 110:15
+PE2(config-vrf)#exit
+PE2(config)#ip vrf B2							// pour créer la route de secour coté CE2 passant par PE2 
+PE2(config-vrf)#rd 110:2
+PE2(config-vrf)#route-target import 110:23
+PE2(config-vrf)#route-target export 110:23
+PE2(config-vrf)#exit
+PE2(config)#interface FastEthernet0/0					
+PE2(config-if)#ip vrf forwarding C5					
+PE2(config-if)#ip address 20.3.22.22 255.255.255.0			
+PE2(config-if)#no shutdown						
+PE2(config-if)#exit
+PE2(config)#interface GigabitEthernet3/0				
+PE2(config-if)#ip vrf forwarding B2
+PE2(config-if)#ip address 20.2.22.22 255.255.255.0
+PE2(config-if)#no shutdown
+PE2(config-if)#exit
+
+//...
+// ( faire pareil pour PE4)
+--------------------------------------------------------------------------------------------------------------------
+
+Part4.2 MP-BGP VRF :
+--------------------------------------------------------------------------------------------------------------------
+// router concerné (CE1 CE2 CE3 CE4 CE5 PE1 PE2 PE4)
+// on va crée les route entre les PEi et les CEi en VRF
+// CEi-> PEi = routage BGP
+
+--PE1:
+PE1#configure terminal 
+PE1(config)#ip route vrf A1 1.0.0.1 255.255.255.255 20.1.11.1 		// je créer une route vrf entre PE1 et CE1 pour avoir accès au réseaux de CE1 ( créer une route à la loopback de CE1 en passant par le l'interface f0/0
+PE1(config)#ip route vrf B2 2.0.0.2 255.255.255.255 20.1.22.2 		// same...
+
+--PE2:
+PE2#configure terminal 
+PE2(config)#ip route vrf C5 5.0.0.5 255.255.255.255 20.3.22.5 		
+PE2(config)#ip route vrf B2 2.0.0.2 255.255.255.255 20.2.22.2 		
+
+//...
+// (faire pareil pour PE4)
+
+--CE1:
+CE1#configure terminal							// je créer une route BGP car ça me permettra de gérer plusieur route si besoin
+CE1(config)#router bgp 1
+CE1(config-router)#bgp router-id 1.0.0.1
+CE1(config-router)#address-family ipv4
+CE1(config-router)#neighbor 20.1.11.11 remote-as 110
+CE1(config-router)#neighbor 20.1.11.11 activate
+CE1(config-router)#network 1.0.0.1 mask 255.255.255.255
+CE1(config-router)#exit
+CE1(config)#exit
+
+--CE2:
+CE2#configure terminal							// ce qui est le cas de CE2
+CE2(config)#router bgp 2
+CE2(config-router)#bgp router-id 2.0.0.2
+CE2(config-router)#address-family ipv4
+CE2(config-router)#neighbor 20.1.22.11 remote-as 110
+CE2(config-router)#neighbor 20.1.22.11 activate
+CE2(config-router)#neighbor 20.2.22.22 remote-as 110
+CE2(config-router)#neighbor 20.2.22.22 activate
+CE2(config-router)#network 2.0.0.2 mask 255.255.255.255
+CE2(config-router)#exit
+CE2(config)#exit			
+
+--CE5:
+CE5#configure terminal							
+CE5(config)#router bgp 5
+CE5(config-router)#bgp router-id 5.0.0.5
+CE5(config-router)#address-family ipv4
+CE5(config-router)#neighbor 20.3.22.22 remote-as 110
+CE5(config-router)#neighbor 20.3.22.22 activate
+CE5(config-router)#network 5.0.0.5 mask 255.255.255.255
+CE5(config-router)#exit
+CE5(config)#exit							
+
+
+//...
+//(faire pareil pour CE3,CE4)
+
+--------------------------------------------------------------------------------------------------------------------
+
+Part4.3 MP-BGP VRF :
+--------------------------------------------------------------------------------------------------------------------
+//router concerné ( PE1 et PE4)
+//idée d'un point de vu BGP :
+//	- essayer de faire pinger CE1 à CE4, CE2 à CE3, CE1 à CE5 sans que ces router puisse connaitre le réseau de coeur de l'AS 110
+//	- en gros connecter en iBGP PE1, PE4 et PE2
+//	- le iBGP on va essayer de faire connecter PE1, PE2 et PE4 à partir des addresses de loopback ce qui est bcq plus simple qu'avec des interfaces physique
+//	- les routes entre les CEi et PEi ont été fait dans la partie 4.2
+//idée d'un point de vu VRF :
+//	- partager mon network de vrf entre PE1 et PE4 afin que PE1 sache quoi faire quand j'ai un packet du site 1 du client A et qu'il souhaite l'envoyer au site 2 (et vise versa) (pareil pour le client B et C)
+//	- faire du VPN en gros 
+
+--PE1:
+PE1#configure terminal
+PE1(config)#router bgp 110						// AS 110 des routeurs de coeur ( avec PE1 et PE4 )
+PE1(config-router)#bgp router-id 11.11.11.11				// mon router-id en bgp c'est ce qu'on va voir si on fait des show
+PE1(config-router)#neighbor 44.44.44.44 remote-as 110			// iBGP avec PE4 on va déclarer comme neighbor l'address de loopback de PE4
+PE1(config-router)#neighbor 44.44.44.44 update-source loopback1		// pour qu'on puisse pinger l'address de loopback de PE4 il faut aussi déclarer que je dois utiliser mon address de loopback la : 11.11.11.11/32
+PE1(config-router)#neighbor 22.22.22.22 remote-as 110			// same pour PE2
+PE1(config-router)#neighbor 22.22.22.22 update-source loopback1		
+PE1(config-router)#address-family vpnv4
+PE1(config-router-af)#neighbor 44.44.44.44 activate			// j'active mon lien en vpn
+PE1(config-router-af)#neighbor 44.44.44.44 next-hop-self		// cette commande permet de faire en sorte que tous les packets passant par 44.44.44.44 passent par mon router pour pinger mon CE1 ( sans ça PE4 et CE4 ne sait pas comment router à CE1 same pour CE2 et CE3)		
+PE1(config-router-af)#neighbor 44.44.44.44 send-community both		// permet de partager mon réseaux de vrf à PE4 et que PE4 puisse me passer son réseaux de vrf (remplace le network classique de bgp)
+PE1(config-router-af)#neighbor 22.22.22.22 activate			
+PE1(config-router-af)#neighbor 22.22.22.22 next-hop-self				
+PE1(config-router-af)#neighbor 22.22.22.22 send-community both		
+PE1(config-router-af)#exit
+PE1(config-router)#address-family ipv4 vrf A1				// permet de redistribute la route vrf A1 en ibgp à PE4 et PE2
+PE1(config-router-af)#redistribute static
+PE1(config-router-af)#redistribute connected
+PE1(config-router)#neighbor 20.1.11.1 remote-as 1			// faire de eBGP avec CE1
+PE1(config-router)#neighbor 20.1.11.1 activate
+PE1(config-router-af)#exit
+PE1(config-router)#address-family ipv4 vrf B2				// permet de redistribute la route vrf B2 en ibgp à PE4				
+PE1(config-router-af)#redistribute static
+PE1(config-router-af)#redistribute connected
+PE1(config-router)#neighbor 20.1.22.2 remote-as 2			// faire de eBGP avec CE2
+PE1(config-router)#neighbor 20.1.22.2 activate
+PE1(config-router-af)#exit
+
+--PE2:
+PE2#configure terminal
+PE2(config)#router bgp 110						
+PE2(config-router)#bgp router-id 22.22.22.22				
+PE2(config-router)#neighbor 44.44.44.44 remote-as 110			
+PE2(config-router)#neighbor 44.44.44.44 update-source loopback1		
+PE2(config-router)#neighbor 11.11.11.11 remote-as 110			
+PE2(config-router)#neighbor 11.11.11.11 update-source loopback1		
+PE2(config-router)#address-family vpnv4
+PE2(config-router-af)#neighbor 44.44.44.44 activate			
+PE2(config-router-af)#neighbor 44.44.44.44 next-hop-self		
+PE2(config-router-af)#neighbor 44.44.44.44 send-community both		
+PE2(config-router-af)#neighbor 11.11.11.11 activate			
+PE2(config-router-af)#neighbor 11.11.11.11 next-hop-self				
+PE2(config-router-af)#neighbor 11.11.11.11 send-community both		
+PE2(config-router-af)#exit
+PE2(config-router)#address-family ipv4 vrf C5				
+PE2(config-router-af)#redistribute static
+PE2(config-router-af)#redistribute connected
+PE2(config-router)#neighbor 20.3.22.5 remote-as 5			// eBGP avec CE5
+PE2(config-router)#neighbor 20.3.22.5 activate
+PE2(config-router-af)#exit
+PE2(config-router)#address-family ipv4 vrf B2							
+PE2(config-router-af)#redistribute static
+PE2(config-router-af)#redistribute connected
+PE2(config-router)#neighbor 20.2.22.2 remote-as 2			// eBGP avec CE2
+PE2(config-router)#neighbor 20.2.22.2 activate
+PE2(config-router-af)#exit
+
+//...
+// (faire pareil pour PE4)
+--------------------------------------------------------------------------------------------------------------------
+
+CONCLUSION:
+--------------------------------------------------------------------------------------------------------------------
+// normalement CE1 peut pinger CE4 et à CE5 mais ne peut pas pinger CE2 ou CE3 car ce n'est pas dans son réseaux vpn
+// CE5 ne peut pas pinger CE4 et vise versa 
+// same pour CE2etCE3
+--------------------------------------------------------------------------------------------------------------------

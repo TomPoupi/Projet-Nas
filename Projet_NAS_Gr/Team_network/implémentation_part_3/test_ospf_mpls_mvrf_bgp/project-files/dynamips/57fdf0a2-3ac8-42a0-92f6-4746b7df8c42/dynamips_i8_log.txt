@@ -1,0 +1,64 @@
+Jan 08 17:11:41.339 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Jan 08 17:11:41.340 HYPERVISOR: Started on TCP port = 49636.
+Jan 08 17:11:41.817 HYPERVISOR: exec_cmd: hypervisor version 
+Jan 08 17:11:41.818 HYPERVISOR: exec_cmd: hypervisor working_dir D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part3\test_ospf_mpls_mvrf_bgp\project-files\dynamips 
+Jan 08 17:11:41.818 GENERAL: working_dir=D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part3\test_ospf_mpls_mvrf_bgp\project-files\dynamips
+Jan 08 17:11:41.819 HYPERVISOR: exec_cmd: hypervisor working_dir D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part3\test_ospf_mpls_mvrf_bgp\project-files\dynamips\1f2635ce-c790-4882-a6b4-2d60a03e715d 
+Jan 08 17:11:41.821 GENERAL: working_dir=D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part3\test_ospf_mpls_mvrf_bgp\project-files\dynamips\1f2635ce-c790-4882-a6b4-2d60a03e715d
+Jan 08 17:11:41.821 HYPERVISOR: exec_cmd: vm create CE3 5 c7200 
+Jan 08 17:11:41.826 VM: VM CE3 created.
+Jan 08 17:11:41.827 HYPERVISOR: exec_cmd: vm set_con_tcp_port CE3 5000 
+Jan 08 17:11:41.828 HYPERVISOR: exec_cmd: c7200 get_mac_addr CE3 
+Jan 08 17:11:41.829 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:11:41.830 HYPERVISOR: exec_cmd: vm slot_add_binding CE3 0 0 C7200-IO-FE 
+Jan 08 17:11:41.831 HYPERVISOR: exec_cmd: vm set_disk0 CE3 0 
+Jan 08 17:11:41.833 HYPERVISOR: exec_cmd: vm set_exec_area CE3 64 
+Jan 08 17:11:41.834 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:11:41.834 HYPERVISOR: exec_cmd: vm set_idle_pc CE3 0x62cc90e4 
+Jan 08 17:11:41.838 HYPERVISOR: exec_cmd: vm set_ios CE3 C:/Users/tpoup/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+Jan 08 17:11:41.838 HYPERVISOR: exec_cmd: c7200 set_mac_addr CE3 ca05.3398.0000 
+Jan 08 17:11:41.839 HYPERVISOR: exec_cmd: vm set_nvram CE3 512 
+Jan 08 17:11:41.840 HYPERVISOR: exec_cmd: vm set_ram CE3 512 
+Jan 08 17:11:41.841 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:11:41.842 HYPERVISOR: exec_cmd: vm slot_add_binding CE3 1 0 PA-GE 
+Jan 08 17:11:41.842 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:11:41.843 HYPERVISOR: exec_cmd: vm slot_add_binding CE3 2 0 PA-GE 
+Jan 08 17:11:41.843 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:11:41.844 HYPERVISOR: exec_cmd: vm slot_add_binding CE3 3 0 PA-GE 
+Jan 08 17:11:41.845 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:11:41.845 HYPERVISOR: exec_cmd: vm slot_add_binding CE3 4 0 PA-GE 
+Jan 08 17:11:41.846 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:11:41.846 HYPERVISOR: exec_cmd: vm slot_add_binding CE3 5 0 PA-GE 
+Jan 08 17:11:41.847 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:11:41.847 HYPERVISOR: exec_cmd: vm slot_add_binding CE3 6 0 PA-GE 
+Jan 08 17:11:45.909 HYPERVISOR: exec_cmd: nio create_udp udp-d5bd950f-6e01-417d-82e9-26fb159a9225 10044 127.0.0.1 10045 
+Jan 08 17:11:46.165 HYPERVISOR: exec_cmd: vm slot_add_nio_binding CE3 3 0 udp-d5bd950f-6e01-417d-82e9-26fb159a9225 
+Jan 08 17:11:46.165 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:12:54.516 HYPERVISOR: exec_cmd: vm set_ghost_status CE3 2 
+Jan 08 17:12:54.518 HYPERVISOR: exec_cmd: vm set_ghost_file CE3 D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part3\test_ospf_mpls_mvrf_bgp\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Jan 08 17:12:54.521 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 17:12:54.523 HYPERVISOR: exec_cmd: vm set_config CE3 configs\i5_startup-config.cfg configs\i5_private-config.cfg 
+Jan 08 17:12:54.524 HYPERVISOR: exec_cmd: vm start CE3 
+Jan 08 17:13:24.828 HYPERVISOR: exec_cmd: vm extract_config CE3 
+Jan 08 18:40:58.488 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 18:40:58.488 HYPERVISOR: exec_cmd: vm stop CE3 
+Jan 08 18:40:58.622 VM: VM CE3 shutdown.
+Jan 08 18:40:58.623 HYPERVISOR: exec_cmd: vm extract_config CE3 
+Jan 08 18:42:15.148 HYPERVISOR: exec_cmd: vm set_ghost_status CE3 2 
+Jan 08 18:42:15.149 HYPERVISOR: exec_cmd: vm set_ghost_file CE3 D:\ETUDE\Dossier INSA\TC-4A\NAS\TP\NETWORK_implémentation\implémentation_part3\test_ospf_mpls_mvrf_bgp\project-files\dynamips\c7200-advipservicesk9-mz.152-4.S5.image-512.ghost 
+Jan 08 18:42:15.150 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 18:42:15.151 HYPERVISOR: exec_cmd: vm set_config CE3 configs\i5_startup-config.cfg configs\i5_private-config.cfg 
+Jan 08 18:42:15.152 HYPERVISOR: exec_cmd: vm start CE3 
+Jan 08 18:43:19.145 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 18:43:19.145 HYPERVISOR: exec_cmd: vm stop CE3 
+Jan 08 18:43:19.269 VM: VM CE3 shutdown.
+Jan 08 18:43:19.270 HYPERVISOR: exec_cmd: vm extract_config CE3 
+Jan 08 18:44:02.038 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 18:44:02.039 HYPERVISOR: exec_cmd: vm extract_config CE3 
+Jan 08 18:44:02.330 HYPERVISOR: exec_cmd: vm get_status CE3 
+Jan 08 18:44:02.331 HYPERVISOR: exec_cmd: vm extract_config CE3 
+Jan 08 18:44:02.334 HYPERVISOR: exec_cmd: vm delete CE3 
+Jan 08 18:44:02.334 VM: VM CE3 destroyed.
+Jan 08 18:44:02.336 HYPERVISOR: exec_cmd: hypervisor stop 
+Jan 08 18:44:02.340 HYPERVISOR: Stopped.
+Jan 08 18:44:02.340 GENERAL: reset done.
