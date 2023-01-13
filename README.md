@@ -80,7 +80,7 @@ Et on ajoute dans les configs des interfaces des PE une presecion sur si on fait
 => Routeur : CE
   	
 	** bgp :
-            AS 
+            process(Num de AS)
             router-id
   	** vrf :
             Name de la vrf
