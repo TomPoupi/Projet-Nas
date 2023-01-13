@@ -3,6 +3,10 @@
 ## Objectif du projet
 Ce projet a pour but de se familiariser avec les différents protocols réseau (MPLS, BGP, OSPF et VRF). La figure ci-dessous est la présentation globale de notre projet. L'objectif est d'automatiser la mise en place d'une configuration sur un réseau. Nous utilisons une base de donnée en format JSON qui répertorie les différents protocols sur chaque routeur ainsi que leurs adresses sur chacune des interfaces.
 
+
+![schéma_part3](https://user-images.githubusercontent.com/114821370/212350689-64891214-e1ec-4078-a8e1-3f4953dd1c9d.png)
+
+
 ## Organisation du git
 Celon les différents objectif du projet, le github se découpe celon 2 dossiers principaux
 
