@@ -1,6 +1,7 @@
 # Projet-Nas
 
 ## Objectif du projet
+Ce projet a pour but de se familiariser avec les différents protocols réseau (MPLS, BGP, OSPF et VRF). La figure ci-dessous est la présentation globale de notre projet. L'objectif est d'automatiser la mise en place d'une configuration sur un réseau. Nous utilisons une base de donnée en format JSON qui répertorie les différents protocols sur chaque routeur ainsi que leurs adresses sur chacune des interfaces.
 
 ## Organisation du git
 Celon les différents objectif du projet, le github se découpe celon 2 dossiers principaux
@@ -44,11 +45,11 @@ Il présente la structure data qui contient tous les routeurs de notre réseau.
 
 On spécifie pour chaque routeur les informations suivantes :
 	
-	 ** Name du routeur
+	** Name du routeur
 	 ** Son role [ CE , PE , R ]
 	 ** Sa position X,Y
 	 ** Les interfaces de ce routeur: 
-	    Pour chaque interface on specifie :
+	      Pour chaque interface on specifie :
 			    -> Name de l'interface 
 			    -> L'adresse IPv4 
 			    -> On precise aussi le neighbor de ce Routeur sur cette interface 
@@ -80,7 +81,7 @@ Et on ajoute dans les configs des interfaces des PE une presecion sur si on fait
 => Routeur : CE
   	
 	** bgp :
-            process(Num de AS)
+            AS 
             router-id
   	** vrf :
             Name de la vrf
