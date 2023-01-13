@@ -31,6 +31,8 @@ Avant de pouvoir lancer le script, ouvrez un projet GNS3. <br />
 Dans **Edit > Preferences > Server**, faire attention à paramétrer le **Host binding** en **localhost** et le **port** au **3090 TCP**. <br />
 Pour que la connexion se fasse il faut aussi faire attention à avoir cocher la case *"Allow console connections to any local IP address"*
 
+![Capture](https://user-images.githubusercontent.com/84526681/212342093-97cf70af-2805-445f-b2a1-0465d3af0277.PNG)
+
 #### Lancer le script
 ```
 python ./script.py`
