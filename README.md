@@ -33,7 +33,7 @@ Pour que la connexion se fasse il faut aussi faire attention à avoir cocher la 
 
 #### Lancer le script
 ```
-node ./script.py`
+python ./script.py`
 ```
 
 ## Organisation des données (JSON)
