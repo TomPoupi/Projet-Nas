@@ -98,7 +98,7 @@ Plan du modèle servi pour l'implémentation 3
 (exemple avec le schéma du README)
 
 -Le cœur du réseau est constitué des routeurs R1, R2, R3 et R4. On a sur les bordures, les routeurs PE1 et PE4 (provider edge). Et finalement les clients 
-(customer edge) reliés à leurs PE : CE1, CE2, CE3 et CE4. 
+(customer edge) reliés à leurs PE : CE1, CE2, CE3 ,CE4 et CE5. 
 
 -On a les protocoles MPLS et LDP sur les 6 routeurs : R1, R2, R3, R4, PE1 et PE4. Ce protocole permet de créer des labels et du coup setup plus rapidement les routeurs à chaque changement de topologie. Ces routeurs n’ont besoin que d’un seul label pour envoyer un packet vers un autre routeur. 
 Un protocole OSPF dans le core (backbone) donc aussi sur les 6 routeurs (R1, R2, R3, R4, PE1 et PE4) ; l’objectif est d’établir la table de routage pour mettre en évidence l’état des liens et les tables d’adjacence donc tous les composants du coeur connaissent leurs voisins et vont choisir les labels pour ensuite les annoncer à ces voisins. 
