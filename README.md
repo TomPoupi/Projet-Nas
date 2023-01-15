@@ -1,14 +1,14 @@
 # Projet-Nas
 
 ## Objectif du projet
-Ce projet a pour but de se familiariser avec les différents protocols réseau (MPLS, BGP, OSPF et VRF). La figure ci-dessous est la présentation globale de notre projet. L'objectif est d'automatiser la mise en place d'une configuration sur un réseau. Nous utilisons une base de donnée en format JSON qui répertorie les différents protocols sur chaque routeur ainsi que leurs adresses sur chacune des interfaces.
+Ce projet a pour but de se familiariser avec les différents protocoles réseau (MPLS, BGP, OSPF et VRF). La figure ci-dessous est la présentation globale de notre projet. L'objectif est d'automatiser la mise en place d'une configuration sur un réseau. Nous utilisons une base de donnée en format JSON qui répertorie les différents protocoles sur chaque routeur ainsi que leurs adresses sur chacune des interfaces.
 
 
 ![schéma_part3](https://user-images.githubusercontent.com/114821370/212350689-64891214-e1ec-4078-a8e1-3f4953dd1c9d.png)
 
 
 ## Organisation du git
-Celon les différents objectif du projet, le github se découpe celon 2 dossiers principaux
+Selon les différents objectif du projet, le github se découpe en 2 dossiers principaux:
 
 - Team_network <br />
 Il contient les projets GNS3 de l'implémentation modèle utilisée ainsi qu'un plan de cette dernière. On y trouve aussi un fichier texte récapitulant les commandes de configuration des routeurs à réaliser pour l'implémentation des différents protocoles.
@@ -19,7 +19,7 @@ Il contient les scripts en python réalisés pour effectuer les configurations f
 ## Comment lancer le projet
 ### Lancer le script de l'autoconfiguration
 
-Telecharger le dossier script
+Télécharger le dossier script
 
 #### Prérequis:
 Pour faire le lien entre le script python et GNS3, nous utilisons la librairie gns3fy:
