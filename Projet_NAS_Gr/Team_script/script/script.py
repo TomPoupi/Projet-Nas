@@ -35,9 +35,6 @@ def create_node(routers) :
         router = gns3fy.Node(name=routers[i]["name"],connector=gns3_server, project_id=project_id,template="c7200",x=X,y=Y)
         router.create()
 
-        # config=formatageRouter(routers[i])
-        # router.write_file(path='./configs/i'+str(i+1)+'_startup-config.cfg',data=config)
-
 # fonction qui prend les routers de la data.json et fait un tableau de dictionnaire. key :interface, element : couple de router
 # pour le moment la data.json fera en sorte que pour un lien on utilisera une même interface dans les 2 routers 
 def tab_de_tab_link(routers) :

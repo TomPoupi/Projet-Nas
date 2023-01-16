@@ -136,7 +136,6 @@
 						"neighbor":"R8",
 						"config_ospf_mpls": false
 					}
-
 				]
 		},
 		{
@@ -476,7 +475,6 @@
 				]
 		}
 		
-
 	]
 }
 
