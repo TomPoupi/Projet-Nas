@@ -47,9 +47,14 @@ python ./script.py`
 Notre fichier "data.json" représente notre configuration sous un format spécifique.
 Il présente la structure data qui contient tous les routeurs de notre réseau.
 
+!!! ATTENTION !!!
+Quand vous ajouter un router sur la data.json, les noms doivent être dans l'ordre croissant R1 puis R2 puis R3 etc.... et doit avoir R(dernierid+1)
+au sinon la positions des routers sur GNS3 ne sera pas pris en compte.
+exemple : si j'ai R1,R2,R3 dans ma data.json le prochain router que je souhaite ajouter doit être R4
+
 On spécifie pour chaque routeur les informations suivantes :
 	
-	** Name du routeur
+	** Name du routeur (Ri)
 	 ** Son role ( CE ou PE ou R )
 	 ** Sa position X,Y
 	 ** Les interfaces de ce routeur: 
